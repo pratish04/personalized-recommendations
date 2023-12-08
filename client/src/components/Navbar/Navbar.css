@@ -1,0 +1,22 @@
+.navbar {
+  border: 1px solid black;
+  width: 98%;
+  height: 60px;
+  padding: 1%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  position: fixed;
+  background-color: white;
+  z-index: 2;
+}
+
+.nav-icon {
+  position: fixed;
+  left: 1%;
+}
+
+.navbar > div:not(.nav-icon) {
+  display: flex;
+  margin: 1%;
+}

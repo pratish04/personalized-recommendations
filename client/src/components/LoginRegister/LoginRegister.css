@@ -1,0 +1,96 @@
+.log-reg {
+  /* padding: 50px; */
+  top: 175px;
+  position: relative;
+  /* background-color: red; */
+  display: flex;
+  justify-content: center;
+  /* border: 5px solid black; */
+  padding: 2%;
+}
+
+.log-reg-con {
+  /* border: 1px solid black; */
+  width: 44%;
+  min-width: fit-content;
+  padding: 1%;
+  /* box-shadow: 0 0 10px 5px violet; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+
+.con-border {
+  /* border: 1px solid black; */
+  /* box-shadow: 0 0 10px 5px indigo; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1%;
+}
+
+.con-border > * {
+  width: 90%;
+  height: 40px;
+  margin: 1%;
+  box-sizing: border-box;
+}
+
+button {
+  cursor: pointer;
+  background-color: white;
+  border: 1px solid grey;
+}
+
+* {
+  letter-spacing: 4px;
+  border-radius: 3px;
+  /* border: 1px solid grey; */
+}
+
+input {
+  padding: 1%;
+  border: 1px solid grey;
+}
+
+input:focus {
+  outline: none;
+  border: none;
+}
+
+button:focus {
+  border: none;
+}
+
+/* .con-border:hover{
+    box-shadow: 0 0 10px black;
+    border: none; 
+    border-radius: 10px;
+} */
+
+.con-border:hover {
+  box-shadow: 0 0 10px black;
+  border: none;
+  border-radius: 10px;
+}
+
+.error {
+  font-size: 14px;
+  color: red;
+  margin: -4px 0 0 0;
+  /* letter-spacing: 5px; */
+  font-weight: 500;
+  /* border: 1px solid black; */
+  height: fit-content;
+  text-align: center;
+}
+
+@keyframes spin {
+    from {
+        transform: scale(1) rotate(0deg);
+    }
+    to {
+        transform: scale(1) rotate(360deg);
+    }
+}
