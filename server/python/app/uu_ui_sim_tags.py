@@ -30,7 +30,6 @@ def uu_ui_sim_tags():
             jaccard_matrix[i][j]=jaccard_similarity(len(user_tag_dict[data1[i][0]].intersection(item_tag_dict[data2[j][0]])), len(user_tag_dict[data1[i][0]]), len(item_tag_dict[data2[j][0]]))
 
     df = pd.DataFrame(jaccard_matrix, index=[user[0] for user in data1], columns=[item[0] for item in data2])
-    print (df)
     del jaccard_matrix
     
     ## saving calculated similarity matrix in redis
@@ -66,26 +65,26 @@ def uu_ui_sim_tags():
     json_string = json.dumps(df_redis)
     r.set("uu_sim_tags", json_string)
 
-uu_ui_sim_tags()
+# uu_ui_sim_tags()
 
-json_string = r.get("ui_sim_tags")
+# json_string = r.get("ui_sim_tags")
 
-if json_string is not None:
-    # Convert the JSON string back to a Python dictionary
-    your_dict = json.loads(json_string)
+# if json_string is not None:
+#     # Convert the JSON string back to a Python dictionary
+#     your_dict = json.loads(json_string)
     
-    # Now, your_dict contains the original dictionary
-    # print("here is your ui_sim_tags dict: \n", your_dict)
-else:
-    print("The key ui_sim_tags does not exist in Redis.")
+#     # Now, your_dict contains the original dictionary
+#     print("here is your ui_sim_tags dict: \n", your_dict)
+# else:
+#     print("The key ui_sim_tags does not exist in Redis.")
 
-json_string = r.get("uu_sim_tags")
+# json_string = r.get("uu_sim_tags")
 
-if json_string is not None:
-    # Convert the JSON string back to a Python dictionary
-    your_dict = json.loads(json_string)
+# if json_string is not None:
+#     # Convert the JSON string back to a Python dictionary
+#     your_dict = json.loads(json_string)
     
-    # Now, your_dict contains the original dictionary
-    # print("here is your uu_sim_tags dict: \n", your_dict)
-else:
-    print("The key uu_sim_tags does not exist in Redis.")
+#     # Now, your_dict contains the original dictionary
+#     print("here is your uu_sim_tags dict: \n", your_dict)
+# else:
+#     print("The key uu_sim_tags does not exist in Redis.")

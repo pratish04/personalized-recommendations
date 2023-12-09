@@ -7,9 +7,11 @@ import { arrow_right } from "react-icons-kit/ikons/arrow_right";
 import { InfinitySpin } from "react-loader-spinner";
 
 import Navbar from "../Navbar/Navbar";
+import Items from "./Item";
 
 import "./Home.css";
 import { useNavigate } from "react-router-dom";
+import ItemWindow from "./ItemWindow";
 
 // require("dotenv").config();
 
@@ -22,10 +24,12 @@ const Home = () => {
 
   const [createProfile, setCreateProfile] = useState(true);
   const [uiSimTagItems, setUiSimTagItems] = useState([]);
+  const [showItemWindow, setShowItemWindow] = useState(false);
+  const [item, setItem] = useState({});
 
-  useEffect(()=>{
-    console.log(uiSimTagItems);
-  }, [uiSimTagItems]);
+  // useEffect(()=>{
+  //   console.log(uiSimTagItems);
+  // }, [uiSimTagItems]);
 
   useEffect(() => {
     const isAuthenticated = async () => {
@@ -100,6 +104,7 @@ const Home = () => {
       );
         setLoading(false);
         setCreateProfile(false);
+        setUiSimTagItems(res.data.ui_sim_tag_items);
 
     } catch (err) {
       alert("Some error occurred! Please try after some time!");
@@ -107,6 +112,17 @@ const Home = () => {
       setLoading(false);
     }
   };
+
+
+  const handleItemWindow=(value, item)=>{
+    console.log("handling item window!");
+    setShowItemWindow(value);
+    setItem(item);
+  }
+
+  useEffect(()=>{
+    console.log("showItemWindow toggle value: ", showItemWindow);
+  }, [showItemWindow]);
 
   return (
     <>
@@ -181,11 +197,15 @@ const Home = () => {
             </div>
             </div>}
         { 
-            !createProfile &&
-            <div>
-                
-            </div>
+            !createProfile 
+            && !showItemWindow 
+            &&
+            <Items uiSimTagItems={uiSimTagItems} handleItemWindow={handleItemWindow} />
 
+        }
+        {
+          showItemWindow && 
+          <ItemWindow item={item} handleItemWindow={handleItemWindow} showItemWindow={showItemWindow}/>
         }
 
         </div>

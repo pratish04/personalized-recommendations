@@ -19,7 +19,10 @@ const query = require("../database/connection");
 }
 
 const fetchSimilarProducts=async(itemId)=>{
-  const result = await query("SELECT item_id, item_name, item_price, item_tags FROM items WHERE item_id = ANY($1)", [itemId]);
+  const result = await query(
+    "SELECT item_id, item_name, item_price, item_tags, item_image FROM items WHERE item_id = ANY($1) ORDER BY ARRAY_POSITION($1, item_id);",
+    [itemId]
+  );
   return result.rows;
 }
 
@@ -32,16 +35,10 @@ router.get("/", authorization, async (req, res) => {
       "SELECT * FROM user_profiles WHERE user_id=$1",
       [req.data.userId]
     );
-    console.log("user profiles: ", result2.rows.length);
 
     if (result2.rows.length > 0) {
-      console.log('hihi');
       const user_sim_item_id = await userItemTagSim(req.data.userId);
-      console.log(user_sim_item_id);
-
       const result3 = await fetchSimilarProducts(user_sim_item_id);
-      console.log(result3);
-
       res.send({ alreadyExists: true, username: result1.rows[0].user_name, ui_sim_tag_items: result3});
     } else {
       res.send({ username: result1.rows[0].user_name });

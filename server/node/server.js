@@ -8,6 +8,7 @@ const registerRoutes = require("./routes/registerRoutes");
 const loginRoutes = require("./routes/loginRoutes");
 const homeRoutes = require("./routes/homeRoutes");
 const profileRoutes = require("./routes/profileRoutes");
+const similarTagItemsRoutes = require("./routes/similarTagItemsRoutes");
 
 const query= require("./database/connection");
 
@@ -28,6 +29,7 @@ app.use('/register', registerRoutes);
 app.use('/login', loginRoutes);
 app.use('/home', homeRoutes);
 app.use('/user-profile', profileRoutes);
+app.use('/similar-tag-items', similarTagItemsRoutes);
 
 
 
