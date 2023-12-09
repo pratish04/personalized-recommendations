@@ -50,7 +50,8 @@ def ii_sim_tags():
         df_redis[index] = pair_dict[index]
 
     json_string = json.dumps(df_redis)
-    r.set("ii_sim_tags", json_string)
+    res=r.set("ii_sim_tags", json_string)
+    print(res)
     
 ii_sim_tags()
 

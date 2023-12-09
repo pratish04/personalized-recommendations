@@ -21,6 +21,11 @@ const Home = () => {
   const [loading, setLoading] = useState(false);
 
   const [createProfile, setCreateProfile] = useState(true);
+  const [uiSimTagItems, setUiSimTagItems] = useState([]);
+
+  useEffect(()=>{
+    console.log(uiSimTagItems);
+  }, [uiSimTagItems]);
 
   useEffect(() => {
     const isAuthenticated = async () => {
@@ -39,6 +44,7 @@ const Home = () => {
           setUsername(res.data.username);
           if(res.data.alreadyExists)
             setCreateProfile(false);
+            setUiSimTagItems(res.data.ui_sim_tag_items);
           setLoading(false);
         }
       } catch (err) {

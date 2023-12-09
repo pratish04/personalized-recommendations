@@ -30,6 +30,7 @@ def uu_ui_sim_tags():
             jaccard_matrix[i][j]=jaccard_similarity(len(user_tag_dict[data1[i][0]].intersection(item_tag_dict[data2[j][0]])), len(user_tag_dict[data1[i][0]]), len(item_tag_dict[data2[j][0]]))
 
     df = pd.DataFrame(jaccard_matrix, index=[user[0] for user in data1], columns=[item[0] for item in data2])
+    print (df)
     del jaccard_matrix
     
     ## saving calculated similarity matrix in redis
@@ -42,7 +43,7 @@ def uu_ui_sim_tags():
 
     json_string = json.dumps(df_redis)
     r.set("ui_sim_tags", json_string)
-
+    
     jaccard_matrix = [[0] * len(data1) for _ in range(len(data1))]
     
     # calculating user-user similarity matrix using common tags
@@ -74,7 +75,7 @@ if json_string is not None:
     your_dict = json.loads(json_string)
     
     # Now, your_dict contains the original dictionary
-    print("here is your ui_sim_tags dict: \n", your_dict)
+    # print("here is your ui_sim_tags dict: \n", your_dict)
 else:
     print("The key ui_sim_tags does not exist in Redis.")
 
@@ -85,6 +86,6 @@ if json_string is not None:
     your_dict = json.loads(json_string)
     
     # Now, your_dict contains the original dictionary
-    print("here is your uu_sim_tags dict: \n", your_dict)
+    # print("here is your uu_sim_tags dict: \n", your_dict)
 else:
     print("The key uu_sim_tags does not exist in Redis.")
