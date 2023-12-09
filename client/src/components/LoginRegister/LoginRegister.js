@@ -16,8 +16,8 @@ const LoginRegister = () => {
 
   const [showPassword, setShowPassword] = useState(false);
   const [showLogin, setShowLogin] = useState(true);
-  const [username, setUsername] = useState("pratish6");
-  const [password, setPassword] = useState("Pratish@04");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({
