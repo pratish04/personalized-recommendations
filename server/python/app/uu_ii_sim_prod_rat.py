@@ -64,8 +64,8 @@ def uu_ii_sim_prod_rat():
     cos_sim_uu_df = pd.DataFrame(cos_sim_uu_matrix, index=pivot_df.index, columns=pivot_df.index)
     cos_sim_ii_matrix=cosine_similarity(predicted_ii_matrix)
     cos_sim_ii_df=pd.DataFrame(cos_sim_ii_matrix, index=pivot_df_transpose.index, columns=pivot_df_transpose.index)
-    print(cos_sim_uu_df)
-    print(cos_sim_ii_df)
+    # print(cos_sim_uu_df)
+    # print(cos_sim_ii_df)
 
     ## saving calculated user-user cosine similarity matrix in redis
     pair_dict = {}
@@ -86,11 +86,8 @@ def uu_ii_sim_prod_rat():
     print(pair_dict, df_redis)
 
     for index, row in cos_sim_ii_df.iterrows():
-        # print("rows"+str(index), row.to_dict())
-        # r.hmset((index, row.to_dict())
         pair_dict[index]=row.to_dict()
         df_redis[index] = pair_dict[index]
-        # print(index, df_redis[index])
 
     json_string = json.dumps(df_redis)
     r.set("ii_sim_prod_rat", json_string)

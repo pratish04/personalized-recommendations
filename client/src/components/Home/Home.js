@@ -20,7 +20,7 @@ const Home = () => {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const [createProfile, setCreateProfile] = useState(false);
+  const [createProfile, setCreateProfile] = useState(true);
 
   useEffect(() => {
     const isAuthenticated = async () => {
@@ -37,6 +37,8 @@ const Home = () => {
           navigate("/");
         } else {
           setUsername(res.data.username);
+          if(res.data.alreadyExists)
+            setCreateProfile(false);
           setLoading(false);
         }
       } catch (err) {
@@ -91,6 +93,7 @@ const Home = () => {
         }
       );
         setLoading(false);
+        setCreateProfile(false);
 
     } catch (err) {
       alert("Some error occurred! Please try after some time!");
@@ -122,7 +125,7 @@ const Home = () => {
         <br />
         <div className="home-con">
           {/* PROFILE CREATION CONTAINER*/}
-        { !createProfile && <div className="profile-creation-con">
+        { createProfile && <div className="profile-creation-con">
             <h4 style={{ margin: "0 0 1% 0" }}>
                 Help us know something more about you!
             </h4>
@@ -172,7 +175,7 @@ const Home = () => {
             </div>
             </div>}
         { 
-            createProfile &&
+            !createProfile &&
             <div>
                 
             </div>

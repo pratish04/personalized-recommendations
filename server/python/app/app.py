@@ -10,18 +10,27 @@ import os
 from connection import establish_connection, close_connection
 
 app = Flask(__name__)
-CORS(app)  # Enable CORS for all routes
+# CORS(app)  # Enable CORS for all routes
+CORS(app, resources={r"/*": {"origins": "http://localhost:3001",}} )
 
-@app.route('/ratings', methods=['GET'])
-def handle_post_request():
-    if request.method == 'POST':
+# @app.route('/ratings', methods=['GET'])
+# def handle_post_request():
+#     if request.method == 'POST':
         
-        return jsonify({"message": "Data received successfully!"})
-    
-@app.route('/testing', methods=['GET', 'POST'])
-def handle_post_request1():
-    if request.method == 'POST':
-        print(request)
+#         return jsonify({"message": "Data received successfully!"})
+
+@app.route('/home', methods=['GET'])
+def handle_post_request():
+    if(request.method=='GET'):
+        print(request.args.get("userId"))
+        print('hihi')
+        # print(request.cookies.get("accessToken"))
+        return jsonify({'message': 'data received successfully!'})
+
+# @app.route('/testing', methods=['GET', 'POST'])
+# def handle_post_request1():
+#     if request.method == 'POST':
+#         print(request)
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))

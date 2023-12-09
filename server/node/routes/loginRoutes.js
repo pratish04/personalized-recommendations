@@ -19,7 +19,7 @@ router.post('/', async(req, res)=>{
         console.log(result1.rows);
         if(result1.rowCount===0){
             console.log("USER DOESN'T EXIST!");
-            res.send({errorStatus: true, message: "User doesn't exist!"});
+            res.send({doesNotExist: true, message: "User doesn't exist!"});
         }
         else{
             bcrypt.compare(req.body.password, result1.rows[0].user_password, async (err, result) => {
@@ -43,8 +43,8 @@ router.post('/', async(req, res)=>{
                     res
                       .cookie("accessToken", token, {
                         httpOnly: true,
-                        sameSite: "none",
-                        secure: true,
+                        // sameSite: "none",
+                        // secure: true,
                       })
                       .send({ message: "Logged in successfully!" });
                 }

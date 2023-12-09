@@ -31,8 +31,7 @@ const LoginRegister = () => {
     const isAuthenticated = async () => {
       try {
         const res = await axios.get(
-          // process.env.REACT_APP_SERVER_URL + "/login",
-          "http://localhost:3001/login",
+          process.env.REACT_APP_SERVER_URL + "/login",
           {
             withCredentials: true,
           }
@@ -67,12 +66,20 @@ const LoginRegister = () => {
         withCredentials: true,
       }
     );
-    if (res.data.errorStatus) {
-      setErrors({ ...errors, alreadyExists: true });
-      setTimeout(() => {
-        setErrors({ ...errors, doesNotExists: false });
+    setLoading(false);
+    if(res.data.doesNotExist){  
+      setErrors({ errors, doesNotExist: true });
+      setTimeout(()=>{
+        setErrors({...errors, doesNotExist: false});
       }, 5000);
-    } else {
+    }
+    else if(res.data.wrongCombination){  
+      setErrors({ errors, wrongCombination: true });
+      setTimeout(()=>{
+        setErrors({...errors, wrongCombination: false});
+      }, 5000);
+    }
+    else {
       console.log("Logged in successfully!");
       navigate("/home");
     }
