@@ -31,6 +31,8 @@ def uu_ui_sim_tags():
 
     df = pd.DataFrame(jaccard_matrix, index=[user[0] for user in data1], columns=[item[0] for item in data2])
     del jaccard_matrix
+
+    print (df)
     
     ## saving calculated similarity matrix in redis
     pair_dict = {}
@@ -65,7 +67,7 @@ def uu_ui_sim_tags():
     json_string = json.dumps(df_redis)
     r.set("uu_sim_tags", json_string)
 
-# uu_ui_sim_tags()
+uu_ui_sim_tags()
 
 # json_string = r.get("ui_sim_tags")
 
